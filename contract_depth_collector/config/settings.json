@@ -1,0 +1,86 @@
+{
+  "exchanges": {
+    "binance": {
+      "enabled": true,
+      "api_key": "",
+      "secret_key": "",
+      "base_url": "https://fapi.binance.com",
+      "ws_url": "wss://fstream.binance.com/ws",
+      "rate_limit": 1200,
+      "timeout": 30
+    },
+    "mexc": {
+      "enabled": true,
+      "api_key": "",
+      "secret_key": "",
+      "base_url": "https://contract.mexc.com",
+      "ws_url": "wss://contract.mexc.com/ws",
+      "rate_limit": 1000,
+      "timeout": 30
+    },
+    "gate": {
+      "enabled": true,
+      "api_key": "",
+      "secret_key": "",
+      "base_url": "https://api.gateio.ws",
+      "ws_url": "wss://fx-ws.gateio.ws/v4/ws/usdt",
+      "rate_limit": 900,
+      "timeout": 30
+    },
+    "okx": {
+      "enabled": true,
+      "api_key": "",
+      "secret_key": "",
+      "passphrase": "",
+      "base_url": "https://www.okx.com",
+      "ws_url": "wss://ws.okx.com:8443/ws/v5/public",
+      "rate_limit": 1000,
+      "timeout": 30
+    },
+    "bingx": {
+      "enabled": true,
+      "api_key": "",
+      "secret_key": "",
+      "base_url": "https://open-api.bingx.com",
+      "ws_url": "wss://open-api-ws.bingx.com/market",
+      "rate_limit": 600,
+      "timeout": 30
+    },
+    "bitunix": {
+      "enabled": true,
+      "api_key": "",
+      "secret_key": "",
+      "base_url": "https://api.bitunix.com",
+      "ws_url": "wss://ws.bitunix.com",
+      "rate_limit": 600,
+      "timeout": 30
+    },
+    "blofin": {
+      "enabled": true,
+      "api_key": "",
+      "secret_key": "",
+      "base_url": "https://open-api.blofin.com",
+      "ws_url": "wss://open-api-ws.blofin.com/public",
+      "rate_limit": 600,
+      "timeout": 30
+    }
+  },
+  "data_collection": {
+    "default_symbols": ["BTCUSDT", "ETHUSDT", "BNBUSDT", "ADAUSDT", "SOLUSDT"],
+    "depth_levels": 20,
+    "update_interval": 1.0,
+    "max_retries": 3,
+    "retry_delay": 5.0
+  },
+  "logging": {
+    "level": "INFO",
+    "file": "logs/collector.log",
+    "max_size": "10MB",
+    "backup_count": 5
+  },
+  "data_storage": {
+    "save_format": ["json", "csv"],
+    "auto_save_interval": 100,
+    "data_directory": "data"
+  }
+}
