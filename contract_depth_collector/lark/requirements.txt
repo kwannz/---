@@ -1,0 +1,33 @@
+# Lark机器人依赖包
+
+# 核心依赖
+aiohttp>=3.8.0
+websockets>=10.0
+asyncio-mqtt>=0.11.0
+
+# 数据处理
+pandas>=1.5.0
+numpy>=1.21.0
+
+# 日志和配置
+python-dotenv>=0.19.0
+colorlog>=6.6.0
+
+# 交易所API
+python-binance>=1.0.0
+ccxt>=2.0.0
+
+# 工具库
+requests>=2.28.0
+urllib3>=1.26.0
+certifi>=2022.0.0
+
+# 开发和测试
+pytest>=7.0.0
+pytest-asyncio>=0.20.0
+black>=22.0.0
+flake8>=5.0.0
+
+# 可选依赖
+redis>=4.0.0  # 用于缓存
+celery>=5.0.0  # 用于任务队列

@@ -23,10 +23,20 @@ class BitunixCollector(BaseCollector):
         """通过REST API获取深度数据"""
         await self._rate_limit_wait()
         
-        url = f"{self.base_url}/api/v1/market/depth"
+        url = f"{self.base_url}/api/v1/futures/market/depth"
+        # Bitunix只支持特定的limit值
+        if limit >= 50:
+            bitunix_limit = "50"
+        elif limit >= 15:
+            bitunix_limit = "15"
+        elif limit >= 5:
+            bitunix_limit = "5"
+        else:
+            bitunix_limit = "1"
+            
         params = {
             'symbol': symbol,
-            'limit': limit
+            'limit': bitunix_limit
         }
         
         try:

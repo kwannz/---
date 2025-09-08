@@ -25,6 +25,9 @@ from exchanges.okx_collector import OKXCollector
 from exchanges.bingx_collector import BingXCollector
 from exchanges.bitunix_collector import BitunixCollector
 from exchanges.blofin_collector import BlofinCollector
+from exchanges.weex_collector import WEEXCollector
+from exchanges.bybit_collector import BybitCollector
+from exchanges.kucoin_collector import KuCoinCollector
 from utils.data_processor import DataProcessor
 from utils.logger_config import setup_logger
 from config.settings import Settings
@@ -58,7 +61,10 @@ class ContractDepthCollector:
             'okx': OKXCollector(self.settings),
             'bingx': BingXCollector(self.settings),
             'bitunix': BitunixCollector(self.settings),
-            'blofin': BlofinCollector(self.settings)
+            'blofin': BlofinCollector(self.settings),
+            'weex': WEEXCollector(self.settings),
+            'bybit': BybitCollector(self.settings),
+            'kucoin': KuCoinCollector(self.settings)
         }
         
         # 数据存储

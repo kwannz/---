@@ -19,22 +19,32 @@ class MEXCCollector(BaseCollector):
     def __init__(self, settings):
         super().__init__(settings, "mexc")
     
-    async def get_depth_rest(self, symbol: str, limit: int = 20) -> Optional[DepthData]:
+    async def get_depth_rest(self, symbol: str, limit: int = 2) -> Optional[DepthData]:
         """通过REST API获取深度数据"""
         await self._rate_limit_wait()
         
-        url = f"{self.base_url}/api/v1/contract/depth"
+        # 转换交易对格式 BTCUSDT -> BTC_USDT
+        mexc_symbol = symbol.replace('USDT', '_USDT')
+        url = f"{self.base_url}/api/v1/contract/depth/{mexc_symbol}"
         params = {
-            'symbol': symbol,
             'limit': limit
+        }
+        
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+            'Accept': 'application/json, text/plain, */*',
+            'Accept-Language': 'en-US,en;q=0.9',
+            'Origin': 'https://futures.mexc.com',
+            'Referer': 'https://futures.mexc.com/',
+            'Connection': 'keep-alive'
         }
         
         try:
             async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=self.timeout)) as session:
-                async with session.get(url, params=params) as response:
+                async with session.get(url, params=params, headers=headers) as response:
                     if response.status == 200:
                         data = await response.json()
-                        if data.get('code') == 0:
+                        if data.get('success') == True and data.get('code') == 0:
                             return self._parse_depth_data(symbol, data.get('data', {}))
                         else:
                             self.logger.error(f"MEXC API错误: {data.get('msg', 'Unknown error')}")

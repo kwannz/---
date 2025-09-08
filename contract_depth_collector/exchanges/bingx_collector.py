@@ -23,9 +23,11 @@ class BingXCollector(BaseCollector):
         """通过REST API获取深度数据"""
         await self._rate_limit_wait()
         
+        # BingX需要特定的交易对格式
+        bingx_symbol = symbol.replace('USDT', '-USDT')
         url = f"{self.base_url}/openApi/swap/v2/quote/depth"
         params = {
-            'symbol': symbol,
+            'symbol': bingx_symbol,
             'limit': limit
         }
         
