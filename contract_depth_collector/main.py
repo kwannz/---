@@ -19,13 +19,13 @@ from pathlib import Path
 
 # 导入各交易所模块
 from exchanges.binance_collector import BinanceCollector
-from exchanges.mexc_collector import MEXCCollector
+from exchanges.mexc_collector import MEXCCollectorFixed
 from exchanges.gate_collector import GateCollector
 from exchanges.okx_collector import OKXCollector
 from exchanges.bingx_collector import BingXCollector
 from exchanges.bitunix_collector import BitunixCollector
-from exchanges.blofin_collector import BlofinCollector
-from exchanges.weex_collector import WEEXCollector
+from exchanges.blofin_collector import BlofinCollectorFixed
+from exchanges.weex_collector import WEEXCollectorFixed
 from exchanges.bybit_collector import BybitCollector
 from exchanges.kucoin_collector import KuCoinCollector
 from utils.data_processor import DataProcessor
@@ -56,13 +56,13 @@ class ContractDepthCollector:
         # 初始化各交易所收集器
         self.collectors = {
             'binance': BinanceCollector(self.settings),
-            'mexc': MEXCCollector(self.settings),
+            'mexc': MEXCCollectorFixed(self.settings),
             'gate': GateCollector(self.settings),
             'okx': OKXCollector(self.settings),
             'bingx': BingXCollector(self.settings),
             'bitunix': BitunixCollector(self.settings),
-            'blofin': BlofinCollector(self.settings),
-            'weex': WEEXCollector(self.settings),
+            'blofin': BlofinCollectorFixed(self.settings),
+            'weex': WEEXCollectorFixed(self.settings),
             'bybit': BybitCollector(self.settings),
             'kucoin': KuCoinCollector(self.settings)
         }

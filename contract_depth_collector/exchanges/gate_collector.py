@@ -23,11 +23,12 @@ class GateCollector(BaseCollector):
         """通过REST API获取深度数据"""
         await self._rate_limit_wait()
         
-        # 转换交易对格式 BTCUSDT -> BTC_USDT
+        # 转换交易对格式 BTCUSDT -> BTC_USDT，用于合约API
         gate_symbol = symbol.replace('USDT', '_USDT')
-        url = f"{self.base_url}/api/v4/spot/order_book"
+        # 使用合约API而不是现货API
+        url = f"{self.base_url}/api/v4/futures/usdt/order_book"
         params = {
-            'currency_pair': gate_symbol,
+            'contract': gate_symbol,
             'limit': limit
         }
         
@@ -37,7 +38,7 @@ class GateCollector(BaseCollector):
                     if response.status == 200:
                         data = await response.json()
                         if 'bids' in data and 'asks' in data:
-                            return self._parse_depth_data(symbol, data)
+                            return self._parse_gate_depth_data(symbol, data)
                         else:
                             self.logger.error(f"Gate.io API错误: {data}")
                             return None
@@ -46,6 +47,50 @@ class GateCollector(BaseCollector):
                         return None
         except Exception as e:
             self.logger.error(f"获取Gate.io深度数据失败: {e}")
+            return None
+    
+    def _parse_gate_depth_data(self, symbol: str, data: Dict[str, Any]) -> DepthData:
+        """解析Gate.io特定格式的深度数据"""
+        try:
+            # Gate.io格式: {"p": "price", "s": size}
+            raw_bids = data.get('bids', [])
+            raw_asks = data.get('asks', [])
+            
+            # 转换为标准格式 [price, volume]
+            bids = []
+            asks = []
+            
+            for bid in raw_bids:
+                if isinstance(bid, dict) and 'p' in bid and 's' in bid:
+                    bids.append([float(bid['p']), float(bid['s'])])
+            
+            for ask in raw_asks:
+                if isinstance(ask, dict) and 'p' in ask and 's' in ask:
+                    asks.append([float(ask['p']), float(ask['s'])])
+            
+            if not bids or not asks:
+                return None
+            
+            # 计算价差
+            spread = asks[0][0] - bids[0][0] if bids and asks else 0.0
+            
+            # 计算总量
+            total_bid_volume = sum(bid[1] for bid in bids)
+            total_ask_volume = sum(ask[1] for ask in asks)
+            
+            return DepthData(
+                exchange="gate",
+                symbol=symbol,
+                timestamp=time.time(),
+                bids=bids,
+                asks=asks,
+                spread=spread,
+                total_bid_volume=total_bid_volume,
+                total_ask_volume=total_ask_volume
+            )
+            
+        except Exception as e:
+            self.logger.error(f"解析Gate.io深度数据失败: {e}")
             return None
     
     async def _websocket_handler(self, symbol: str, callback: Callable[[DepthData], None]):

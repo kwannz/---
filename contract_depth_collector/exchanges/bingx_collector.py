@@ -23,30 +23,56 @@ class BingXCollector(BaseCollector):
         """通过REST API获取深度数据"""
         await self._rate_limit_wait()
         
-        # BingX需要特定的交易对格式
-        bingx_symbol = symbol.replace('USDT', '-USDT')
+        # BingX需要特定的交易对格式: BTCUSDT -> BTC-USDT
+        if symbol.endswith('USDT'):
+            base = symbol.replace('USDT', '')
+            bingx_symbol = f"{base}-USDT"
+        else:
+            bingx_symbol = symbol
+            
         url = f"{self.base_url}/openApi/swap/v2/quote/depth"
         params = {
             'symbol': bingx_symbol,
             'limit': limit
         }
         
-        try:
-            async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=self.timeout)) as session:
-                async with session.get(url, params=params) as response:
-                    if response.status == 200:
-                        data = await response.json()
-                        if data.get('code') == 0:
-                            return self._parse_depth_data(symbol, data.get('data', {}))
+        # 增加重试逻辑和更好的错误处理
+        max_retries = 3
+        for attempt in range(max_retries):
+            try:
+                # 增加延迟避免429错误
+                if attempt > 0:
+                    wait_time = 2.0 * attempt
+                    await asyncio.sleep(wait_time)
+                
+                async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=self.timeout)) as session:
+                    async with session.get(url, params=params) as response:
+                        if response.status == 200:
+                            data = await response.json()
+                            if data.get('code') == 0:
+                                return self._parse_depth_data(symbol, data.get('data', {}))
+                            else:
+                                self.logger.error(f"BingX API错误: {data.get('msg', 'Unknown error')}")
+                                return None
+                        elif response.status == 429:
+                            if attempt < max_retries - 1:
+                                self.logger.warning(f"BingX频率限制，等待重试 ({attempt+1}/{max_retries})")
+                                continue
+                            else:
+                                self.logger.error("BingX频率限制，已达到最大重试次数")
+                                return None
                         else:
-                            self.logger.error(f"BingX API错误: {data.get('msg', 'Unknown error')}")
+                            self.logger.error(f"BingX REST API请求失败: {response.status}")
                             return None
-                    else:
-                        self.logger.error(f"BingX REST API请求失败: {response.status}")
-                        return None
-        except Exception as e:
-            self.logger.error(f"获取BingX深度数据失败: {e}")
-            return None
+            except Exception as e:
+                if attempt < max_retries - 1:
+                    self.logger.warning(f"BingX请求失败，重试 ({attempt+1}/{max_retries}): {e}")
+                    continue
+                else:
+                    self.logger.error(f"获取BingX深度数据失败: {e}")
+                    return None
+        
+        return None
     
     async def _websocket_handler(self, symbol: str, callback: Callable[[DepthData], None]):
         """WebSocket处理器"""

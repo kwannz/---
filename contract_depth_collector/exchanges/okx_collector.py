@@ -23,8 +23,13 @@ class OKXCollector(BaseCollector):
         """通过REST API获取深度数据"""
         await self._rate_limit_wait()
         
-        # 转换交易对格式 BTCUSDT -> BTC-USDT
-        okx_symbol = symbol.replace('USDT', '-USDT')
+        # 转换交易对格式: BTCUSDT -> BTC-USDT
+        if symbol.endswith('USDT'):
+            base = symbol.replace('USDT', '')
+            okx_symbol = f"{base}-USDT"
+        else:
+            okx_symbol = symbol
+            
         url = f"{self.base_url}/api/v5/market/books"
         params = {
             'instId': okx_symbol,

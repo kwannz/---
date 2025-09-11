@@ -1,0 +1,230 @@
+[
+  {
+    "timestamp": "2025-09-08T23:32:57.166359",
+    "exchange": "BingX",
+    "symbol": "BTCUSDT",
+    "bids_count": 10,
+    "asks_count": 10,
+    "best_bid": [
+      112741.4,
+      34.2053
+    ],
+    "best_ask": [
+      112744.4,
+      0.0033
+    ],
+    "spread": 3.0,
+    "total_bid_volume": 35.6446,
+    "total_ask_volume": 0.11080000000000001,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-09-08T23:32:57.204251",
+    "exchange": "OKX",
+    "symbol": "ETHUSDT",
+    "bids_count": 10,
+    "asks_count": 10,
+    "best_bid": [
+      4380.29,
+      28.053128
+    ],
+    "best_ask": [
+      4380.3,
+      1.679844
+    ],
+    "spread": 0.010000000000218279,
+    "total_bid_volume": 46.227939000000006,
+    "total_ask_volume": 5.098624999999999,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-09-08T23:32:57.222799",
+    "exchange": "BingX",
+    "symbol": "ETHUSDT",
+    "bids_count": 10,
+    "asks_count": 10,
+    "best_bid": [
+      4378.43,
+      87.1
+    ],
+    "best_ask": [
+      4379.07,
+      25.64
+    ],
+    "spread": 0.6399999999994179,
+    "total_bid_volume": 202.68999999999997,
+    "total_ask_volume": 188.78000000000003,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-09-08T23:32:57.248654",
+    "exchange": "OKX",
+    "symbol": "BTCUSDT",
+    "bids_count": 10,
+    "asks_count": 10,
+    "best_bid": [
+      112789.2,
+      0.56059944
+    ],
+    "best_ask": [
+      112789.3,
+      0.05933485
+    ],
+    "spread": 0.10000000000582077,
+    "total_bid_volume": 1.7182882300000002,
+    "total_ask_volume": 0.30422422,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-09-08T23:32:57.303908",
+    "exchange": "Bitunix",
+    "symbol": "BTCUSDT",
+    "bids_count": 5,
+    "asks_count": 5,
+    "best_bid": [
+      112722.6,
+      1.8601
+    ],
+    "best_ask": [
+      112722.7,
+      2.3404
+    ],
+    "spread": 0.09999999999126885,
+    "total_bid_volume": 7.406199999999999,
+    "total_ask_volume": 8.8937,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-09-08T23:32:57.319887",
+    "exchange": "Gate",
+    "symbol": "BTCUSDT",
+    "bids_count": 10,
+    "asks_count": 10,
+    "best_bid": [
+      112781.9,
+      0.838432
+    ],
+    "best_ask": [
+      112782.0,
+      0.319197
+    ],
+    "spread": 0.10000000000582077,
+    "total_bid_volume": 1.9463069999999996,
+    "total_ask_volume": 0.424614,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-09-08T23:32:57.394164",
+    "exchange": "Bitunix",
+    "symbol": "ETHUSDT",
+    "bids_count": 5,
+    "asks_count": 5,
+    "best_bid": [
+      4377.54,
+      13.43
+    ],
+    "best_ask": [
+      4377.55,
+      13.172
+    ],
+    "spread": 0.010000000000218279,
+    "total_bid_volume": 52.742,
+    "total_ask_volume": 48.794000000000004,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-09-08T23:32:57.507715",
+    "exchange": "Gate",
+    "symbol": "ETHUSDT",
+    "bids_count": 10,
+    "asks_count": 10,
+    "best_bid": [
+      4379.78,
+      11.0328
+    ],
+    "best_ask": [
+      4379.79,
+      3.365
+    ],
+    "spread": 0.010000000000218279,
+    "total_bid_volume": 14.2552,
+    "total_ask_volume": 5.1225000000000005,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-09-08T23:32:57.578754",
+    "exchange": "Bybit",
+    "symbol": "BTCUSDT",
+    "bids_count": 10,
+    "asks_count": 10,
+    "best_bid": [
+      112737.5,
+      9.042
+    ],
+    "best_ask": [
+      112737.6,
+      3.243
+    ],
+    "spread": 0.10000000000582077,
+    "total_bid_volume": 9.182999999999998,
+    "total_ask_volume": 4.980999999999999,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-09-08T23:32:57.633982",
+    "exchange": "Binance",
+    "symbol": "BTCUSDT",
+    "bids_count": 10,
+    "asks_count": 10,
+    "best_bid": [
+      112722.6,
+      23.318
+    ],
+    "best_ask": [
+      112722.7,
+      2.103
+    ],
+    "spread": 0.09999999999126885,
+    "total_bid_volume": 23.680999999999997,
+    "total_ask_volume": 2.413999999999999,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-09-08T23:32:57.662788",
+    "exchange": "Bybit",
+    "symbol": "ETHUSDT",
+    "bids_count": 10,
+    "asks_count": 10,
+    "best_bid": [
+      4378.22,
+      6.19
+    ],
+    "best_ask": [
+      4378.23,
+      49.39
+    ],
+    "spread": 0.009999999999308784,
+    "total_bid_volume": 11.019999999999998,
+    "total_ask_volume": 119.03,
+    "status": "success"
+  },
+  {
+    "timestamp": "2025-09-08T23:33:02.781787",
+    "exchange": "Binance",
+    "symbol": "ETHUSDT",
+    "bids_count": 10,
+    "asks_count": 10,
+    "best_bid": [
+      4379.99,
+      162.476
+    ],
+    "best_ask": [
+      4380.0,
+      277.769
+    ],
+    "spread": 0.010000000000218279,
+    "total_bid_volume": 163.28799999999995,
+    "total_ask_volume": 288.90599999999995,
+    "status": "success"
+  }
+]

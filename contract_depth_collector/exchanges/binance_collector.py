@@ -47,9 +47,9 @@ class BinanceCollector:
         self.rate_limit = self.config.get("rate_limit", 1200)
         self.timeout = self.config.get("timeout", 30)
         
-        # 速率限制
+        # 速率限制 - 更保守的设置
         self.last_request_time = 0
-        self.min_interval = 1.0 / (self.rate_limit / 60)  # 每分钟请求数转换为间隔
+        self.min_interval = 5.0  # 最少5秒间隔，避免被限制
         
         # WebSocket连接
         self.ws_connections = {}
